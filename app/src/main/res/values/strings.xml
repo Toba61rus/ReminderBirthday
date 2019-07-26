@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">ReminderBirthday</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="field_to_enter_user_data">Field to enter user data</string>
+    <string name="activite_notify">Включить уведомление</string>
+    <string name="date_birthday">Дата рождения</string>
+    <string name="click_for_input_data">Нажмите для ввода данных</string>
+    <string name="date">Дата рождения</string>
+    <string name="fio_user">ФИО пользователя</string>
+</resources>
