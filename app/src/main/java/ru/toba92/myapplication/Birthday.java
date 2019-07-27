@@ -3,6 +3,8 @@ package ru.toba92.myapplication;
 import java.util.Date;
 import java.util.UUID;
 
+//Класс-модель для нашего приложения.
+
 public class Birthday {
 
     private UUID mId;

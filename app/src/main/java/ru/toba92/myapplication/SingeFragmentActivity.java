@@ -6,6 +6,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
+
+//Абстрактный класс, использующийся для переходов из активити во фрагменты.
+
 public  abstract class SingeFragmentActivity extends AppCompatActivity {
 
     protected abstract Fragment createFragment();

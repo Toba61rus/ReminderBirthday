@@ -12,12 +12,14 @@ import android.os.Bundle;
 import java.util.List;
 import java.util.UUID;
 
+//Класс вью-пэйджер, для листания списка пользователей влево и вправо.
+
 public class BirthdayViewPager extends AppCompatActivity {
 
     private List<Birthday> mBirthdays;
     private ViewPager mViewPager;
     private static final String EXTRA_BIRTHDAY_ID="ru.toba92.myapplication.birthday_id";
-
+//Статический Intent предназначенный для приёма ID из другого контроллера сохранении его в дополнении EXTRA и инициилизации в методе onCreate().
     public static final Intent newIntent(Context packageContext, UUID id){
         Intent intent=new Intent(packageContext,BirthdayViewPager.class);
         intent.putExtra(EXTRA_BIRTHDAY_ID,id);
@@ -32,7 +34,7 @@ public class BirthdayViewPager extends AppCompatActivity {
 
     UUID birthdayId=(UUID) getIntent().getSerializableExtra(EXTRA_BIRTHDAY_ID);
 
-
+//Инициилизация вью-пэйджера
     mViewPager=(ViewPager) findViewById(R.id.birthday_view_pager);
     mBirthdays=BirthdayLab.get(this).getBirthdays();
         FragmentManager fragmentManager=getSupportFragmentManager();

@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.UUID;
 
 public class BirthdayLab {
+/*Класс синглет, предназначен для сохранения дней рождений, в независимости от жизненныъ циклов активити, но до выгрузки приложения ОП.
 
+ */
     private static BirthdayLab mBirthdayLab;
     private List<Birthday> mBirthdays;
 
@@ -15,6 +17,7 @@ public class BirthdayLab {
         mBirthdays=new ArrayList<>();
 
         for (int i=0;i<100;i++){
+//СОздаём готовый список из 100 человек с дефолтовыми именами.
 
         Birthday birthday=new Birthday();
         birthday.setInformation("Пользователь "+i);
@@ -22,7 +25,7 @@ public class BirthdayLab {
         mBirthdays.add(birthday);
         }
     }
-
+//    КОнструктор, для обращения к данным дня рождения при помощи get/
     public static BirthdayLab get(Context context){
         if (mBirthdayLab==null){
             mBirthdayLab=new BirthdayLab(context);

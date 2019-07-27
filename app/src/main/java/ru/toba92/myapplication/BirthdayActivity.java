@@ -10,7 +10,7 @@ import java.util.UUID;
 public class BirthdayActivity extends SingeFragmentActivity{
 
 
-    private static final String EXTRA_ID_BIRTHDAY ="ru.toba92.myapplication.birthday_id";
+    private static final String EXTRA_ID_BIRTHDAY ="ru.toba92.myapplication.birthday_id";//Дополнение, для сохранения ID указанного пользователя.
 
     public static Intent newIntent(Context packageContext, UUID id){
 
@@ -18,7 +18,7 @@ public class BirthdayActivity extends SingeFragmentActivity{
         intent.putExtra(EXTRA_ID_BIRTHDAY,id);
         return intent;
     }
-
+//      Метод для передачи ID выбранного пользователя из списка в фрагмент детализации пользователя.
     @Override
     protected Fragment createFragment() {
         UUID birthdayId=(UUID)getIntent().getSerializableExtra(EXTRA_ID_BIRTHDAY);

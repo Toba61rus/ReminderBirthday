@@ -15,7 +15,10 @@ import android.widget.TextView;
 
 import java.util.List;
 
+
+//Контроллер представления списка пользователей.
 public class BirthdayListFragment extends Fragment {
+
 
     private RecyclerView mRecyclerViewListBirthday;
     private BirthdayAdapter mBirthdayAdapter;
@@ -31,11 +34,13 @@ public class BirthdayListFragment extends Fragment {
     public android.view.View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_birthday_list,container,false);
 
+        //Инициилизация вью элементов.
         mRecyclerViewListBirthday=(RecyclerView) view.findViewById(R.id.recycler_view_list_birthday);
         mRecyclerViewListBirthday.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         return view;
     }
+//    Метод возобновления жизненного цикла фрагмента,испольщуется для обновления списка при переходе из фрагмента детализации списка(при помощи метода updateUI())/
     @Override
     public void onResume(){
         super.onResume();
@@ -55,13 +60,15 @@ public class BirthdayListFragment extends Fragment {
     }
 
     private class BirthdayViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
+//        Объявление вью элемнтов.
         private Birthday mBirthday;
         private TextView mDateTextView;
         private TextView mInformationTextView;
         private ImageView mNotifiImageView;
         private ImageView mPersonImageView;//Будет использоваться в дальнейшем.
 
+
+//       Метод привязки информации модели к нашим вью эллементам.
         public void bind(Birthday birthday){
             mBirthday=birthday;
             mInformationTextView.setText(mBirthday.getInformation());
@@ -73,6 +80,7 @@ public class BirthdayListFragment extends Fragment {
         public BirthdayViewHolder(LayoutInflater inflater,ViewGroup container){
             super(inflater.inflate(R.layout.list_item_person_birthday,container,false));
 
+//            Инициилизация вью элементов.
             mDateTextView=(TextView)itemView.findViewById(R.id.item_date_text_view);
             mInformationTextView=(TextView) itemView.findViewById(R.id.ite_information_text_view);
             mPersonImageView=(ImageView)itemView.findViewById(R.id.item_avatar_person);
@@ -84,15 +92,15 @@ public class BirthdayListFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-
-
+//          Отработка нажатий на элементы списка с последующим переходов детализации данного пользователя списка.
             Intent intent=BirthdayViewPager.newIntent(getActivity(),mBirthday.getId());
             startActivity(intent);
 
         }
     }
     private class BirthdayAdapter extends RecyclerView.Adapter<BirthdayViewHolder>{
-        private List<Birthday> mBirthdays;
+
+       private List<Birthday> mBirthdays;
 
         public BirthdayAdapter(List<Birthday> birthdays){
             mBirthdays=birthdays;
