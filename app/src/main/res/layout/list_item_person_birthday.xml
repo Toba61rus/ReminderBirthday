@@ -15,6 +15,7 @@
         android:layout_marginTop="42dp"
         android:layout_margin="8dp"
         android:padding="8dp"
+        android:textSize="24dp"
         android:text="@string/fio_user" />
 
     <TextView
@@ -36,8 +37,8 @@
         android:layout_height="58dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="17dp"
-        android:layout_marginEnd="86dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="52dp"
         android:src="@drawable/user_avatar" />
 
     <ImageView
@@ -46,8 +47,9 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/item_avatar_person"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="39dp"
-        app:srcCompat="@drawable/ic_notifications_active_black_24dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="16dp"
         android:contentDescription="TODO"
+        app:srcCompat="@drawable/ic_notifications_active_black_24dp"
         tools:ignore="VectorDrawableCompat" />
 </RelativeLayout>

@@ -13,19 +13,15 @@ public class BirthdayLab {
     private static BirthdayLab mBirthdayLab;
     private List<Birthday> mBirthdays;
 
+    public void addBirthday(Birthday birthday){
+        mBirthdays.add(birthday);
+    }
+
     private BirthdayLab(Context context) {
         mBirthdays=new ArrayList<>();
 
-        for (int i=0;i<100;i++){
-//СОздаём готовый список из 100 человек с дефолтовыми именами.
-
-        Birthday birthday=new Birthday();
-        birthday.setInformation("Пользователь "+i);
-        birthday.setReceiveNotify(i==0);//Все чеки буду отключены по умолчанию.
-        mBirthdays.add(birthday);
-        }
     }
-//    КОнструктор, для обращения к данным дня рождения при помощи get/
+//    КОнструктор, для обращения к данным дня рождения при помощи get.
     public static BirthdayLab get(Context context){
         if (mBirthdayLab==null){
             mBirthdayLab=new BirthdayLab(context);

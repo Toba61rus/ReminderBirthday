@@ -8,6 +8,9 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -26,8 +29,23 @@ public class BirthdayListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.add_user:
+                Birthday birthday=new Birthday();
+                BirthdayLab.get(getActivity()).addBirthday(birthday);
+                Intent intent=BirthdayViewPager.newIntent(getActivity(),birthday.getId());
+                startActivity(intent);
+                return true;
+                default:
+                    return super.onOptionsItemSelected(item);
+
+        }
+    }
 
     @Nullable
     @Override
@@ -38,6 +56,7 @@ public class BirthdayListFragment extends Fragment {
         mRecyclerViewListBirthday=(RecyclerView) view.findViewById(R.id.recycler_view_list_birthday);
         mRecyclerViewListBirthday.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+
         return view;
     }
 //    Метод возобновления жизненного цикла фрагмента,испольщуется для обновления списка при переходе из фрагмента детализации списка(при помощи метода updateUI())/
@@ -45,6 +64,11 @@ public class BirthdayListFragment extends Fragment {
     public void onResume(){
         super.onResume();
         updateUI();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.toolbar_list_birthday,menu);
     }
 
     private void updateUI() {
@@ -64,7 +88,7 @@ public class BirthdayListFragment extends Fragment {
         private Birthday mBirthday;
         private TextView mDateTextView;
         private TextView mInformationTextView;
-        private ImageView mNotifiImageView;
+        private ImageView mNotifyImageView;
         private ImageView mPersonImageView;//Будет использоваться в дальнейшем.
 
 
@@ -73,18 +97,18 @@ public class BirthdayListFragment extends Fragment {
             mBirthday=birthday;
             mInformationTextView.setText(mBirthday.getInformation());
             mDateTextView.setText(mBirthday.getDate().toString());
-            mNotifiImageView.setVisibility(mBirthday.isReceiveNotify() ? View.VISIBLE:View.GONE);
+            mNotifyImageView.setVisibility(mBirthday.isReceiveNotify() ? View.VISIBLE:View.GONE);
 //            mPersonImageView.setImageBitmap(); Будет использоваться в дальнейшем.
         }
 
         public BirthdayViewHolder(LayoutInflater inflater,ViewGroup container){
             super(inflater.inflate(R.layout.list_item_person_birthday,container,false));
 
-//            Инициилизация вью элементов.
+//         Инициилизация вью элементов.
             mDateTextView=(TextView)itemView.findViewById(R.id.item_date_text_view);
             mInformationTextView=(TextView) itemView.findViewById(R.id.ite_information_text_view);
             mPersonImageView=(ImageView)itemView.findViewById(R.id.item_avatar_person);
-            mNotifiImageView=(ImageView)itemView.findViewById(R.id.notifiImageView);
+            mNotifyImageView =(ImageView)itemView.findViewById(R.id.notifiImageView);
             itemView.setOnClickListener(this);
 
 

@@ -2,8 +2,11 @@ package ru.toba92.myapplication;
 
 
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -15,6 +18,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import java.util.Date;
 import java.util.UUID;
 
 
@@ -26,6 +30,8 @@ public class BirthdayFragment extends Fragment {
     private EditText mInformationConguration;
     private CheckBox mReceiveNotify;
     private static final String ARG_ID_BIRTHDAY ="birthday_id";
+    private static final String DIALOG_DATE="DialogDate";
+    private static final int REQUEST_DATE=0;
 
 
     public static BirthdayFragment newInstance(UUID birthdayId){
@@ -54,11 +60,15 @@ public class BirthdayFragment extends Fragment {
         View view=inflater.inflate(R.layout.fragment_birthday, container, false);
 
         mButtonDate=(Button)view.findViewById(R.id.button_date);
-        mButtonDate.setText(mBirthday.getDate().toString());
-        mButtonDate.setEnabled(false);
+            updateDate();
         mButtonDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                FragmentManager fm=getFragmentManager();
+                DatePickerFragment dialog=DatePickerFragment.newInstance(mBirthday.getDate());
+                dialog.setTargetFragment(BirthdayFragment.this,REQUEST_DATE);
+                dialog.show(fm,DIALOG_DATE);
 
             }
         });
@@ -94,7 +104,22 @@ public class BirthdayFragment extends Fragment {
 
         return view;
     }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        if (resultCode!= Activity.RESULT_OK){
+            return;
+        }
+        if (requestCode==REQUEST_DATE){
+            Date date =(Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
+            mBirthday.setDate(date);
+                updateDate();
+        }
 
+    }
+        private void updateDate(){
+        mButtonDate.setText(mBirthday.getDate().toString());
+
+        }
 
 
 }

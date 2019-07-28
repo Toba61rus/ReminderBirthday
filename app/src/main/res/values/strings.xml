@@ -9,4 +9,5 @@
     <string name="click_for_input_data">Нажмите для ввода данных</string>
     <string name="date">Дата рождения</string>
     <string name="fio_user">ФИО пользователя</string>
+    <string name="add">ADD</string>
 </resources>
