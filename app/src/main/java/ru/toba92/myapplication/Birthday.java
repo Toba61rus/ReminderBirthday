@@ -9,6 +9,8 @@ public class Birthday {
 
     private UUID mId;
     private Date mDate;
+    private boolean mReceiveNotify;
+    private String mInformation;
 
     public boolean isReceiveNotify() {
         return mReceiveNotify;
@@ -18,35 +20,29 @@ public class Birthday {
         mReceiveNotify = receiveNotify;
     }
 
-    private boolean mReceiveNotify;
 
     public UUID getId() {
         return mId;
     }
-
-
-
     public Date getDate() {
         return mDate;
     }
-
     public void setDate(Date date) {
         mDate = date;
     }
-
     public String getInformation() {
         return mInformation;
     }
-
     public void setInformation(String information) {
         mInformation = information;
     }
 
-    private String mInformation;
 
     public Birthday(){
-
-        mId=UUID.randomUUID();
+       this(UUID.randomUUID());
+    }
+    public Birthday(UUID id){
+        mId=id;
         mDate=new Date();
     }
 

@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -25,6 +28,7 @@ public class BirthdayListFragment extends Fragment {
 
     private RecyclerView mRecyclerViewListBirthday;
     private BirthdayAdapter mBirthdayAdapter;
+    private static final String DIALOG_DELETE_USER="DialogDeleteUser";
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -65,13 +69,13 @@ public class BirthdayListFragment extends Fragment {
         super.onResume();
         updateUI();
     }
-
+//Создание меню в тулбаре.
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.toolbar_list_birthday,menu);
     }
-
-    private void updateUI() {
+//Метод обновления представления на экране вывода списка.
+    public  void updateUI() {
         BirthdayLab birthdayLab=BirthdayLab.get(getActivity());
         List<Birthday> birthdays=birthdayLab.getBirthdays();
         if (mBirthdayAdapter==null){
@@ -79,6 +83,7 @@ public class BirthdayListFragment extends Fragment {
         mBirthdayAdapter=new BirthdayAdapter(birthdays);
         mRecyclerViewListBirthday.setAdapter(mBirthdayAdapter);}
         else {
+            mBirthdayAdapter.setBirthday(birthdays);
             mBirthdayAdapter.notifyDataSetChanged();
         }
     }
@@ -102,16 +107,28 @@ public class BirthdayListFragment extends Fragment {
         }
 
         public BirthdayViewHolder(LayoutInflater inflater,ViewGroup container){
-            super(inflater.inflate(R.layout.list_item_person_birthday,container,false));
+            super(inflater.inflate(R.layout.list_item_person_birthday,container,false));//Раздувание представления.
 
-//         Инициилизация вью элементов.
+//         Инициилизация вью элементов представлениея.
             mDateTextView=(TextView)itemView.findViewById(R.id.item_date_text_view);
             mInformationTextView=(TextView) itemView.findViewById(R.id.ite_information_text_view);
             mPersonImageView=(ImageView)itemView.findViewById(R.id.item_avatar_person);
             mNotifyImageView =(ImageView)itemView.findViewById(R.id.notifiImageView);
             itemView.setOnClickListener(this);
+//Метод для удаления указанного пользователя из списка(БД).
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+//                    FragmentManager fragmentManager=getFragmentManager();
+//                    FragmentDeleteUser fragmentDeleteUser=new FragmentDeleteUser();
+//                    fragmentDeleteUser.show(fragmentManager,DIALOG_DELETE_USER);
+//
+                    BirthdayLab.get(getActivity()).deleteBirthday(mBirthday);
+                    updateUI();
 
-
+                    return true;
+                }
+            });
         }
 
         @Override
@@ -148,6 +165,9 @@ public class BirthdayListFragment extends Fragment {
         @Override
         public int getItemCount() {
             return mBirthdays.size();
+        }
+        public void setBirthday(List<Birthday>  birthday){
+            mBirthdays=birthday;
         }
     }
 }

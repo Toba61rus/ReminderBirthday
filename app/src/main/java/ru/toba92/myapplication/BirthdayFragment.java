@@ -24,6 +24,7 @@ import java.util.UUID;
 
 public class BirthdayFragment extends Fragment {
 
+    private Button mRemoveUser;
     private Birthday mBirthday;
     private Button mButtonDate;
     private ImageView mAvatarUser;//Будет использоваться в дальнейшем!
@@ -55,6 +56,14 @@ public class BirthdayFragment extends Fragment {
         mBirthday=BirthdayLab.get(getActivity()).getBirthday(birthdayID);
     }
 
+//    Обновление экарана при создании записи в базе данных.
+    @Override
+    public void onPause(){
+        super.onPause();
+
+        BirthdayLab.get(getActivity()).updateBirthday(mBirthday);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_birthday, container, false);
@@ -72,6 +81,7 @@ public class BirthdayFragment extends Fragment {
 
             }
         });
+
 
         mInformationConguration =(EditText)view.findViewById(R.id.information_congratulated);
         mInformationConguration.setText(mBirthday.getInformation());
@@ -98,6 +108,14 @@ public class BirthdayFragment extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 //                Будет реализованно позже! Будет включать уведомления о предстоящем дне рождении.
             mBirthday.setReceiveNotify(isChecked);
+
+            }
+        });
+        mRemoveUser=(Button) view.findViewById(R.id.remove_user);
+        mRemoveUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
 
             }
         });

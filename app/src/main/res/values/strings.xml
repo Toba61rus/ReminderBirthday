@@ -10,4 +10,6 @@
     <string name="date">Дата рождения</string>
     <string name="fio_user">ФИО пользователя</string>
     <string name="add">ADD</string>
+    <string name="delete_user">Вы действительно хотите удалить пользователя?</string>
+    <string name="delete">Delete</string>
 </resources>

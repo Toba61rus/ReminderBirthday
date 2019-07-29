@@ -68,4 +68,15 @@
         android:layout_marginStart="7dp"
         android:layout_marginBottom="264dp"
         android:text="@string/activite_notify" />
+
+    <Button
+        android:id="@+id/remove_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="176dp"
+        android:layout_marginBottom="206dp"
+        android:text="@string/delete" />
+
 </RelativeLayout>
