@@ -18,13 +18,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
 
 //Контроллер представления списка пользователей.
 public class BirthdayListFragment extends Fragment {
-
 
     private static final int REQUEST_ID_DELETE =0;
     private RecyclerView mRecyclerViewListBirthday;
@@ -35,6 +37,7 @@ public class BirthdayListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
     }
 
     @Override
@@ -60,7 +63,6 @@ public class BirthdayListFragment extends Fragment {
         //Инициилизация вью элементов.
         mRecyclerViewListBirthday=(RecyclerView) view.findViewById(R.id.recycler_view_list_birthday);
         mRecyclerViewListBirthday.setLayoutManager(new LinearLayoutManager(getActivity()));
-
 
         return view;
     }
@@ -102,7 +104,10 @@ public class BirthdayListFragment extends Fragment {
         public void bind(Birthday birthday){
             mBirthday=birthday;
             mInformationTextView.setText(mBirthday.getInformation());
-            mDateTextView.setText(mBirthday.getDate().toString());
+
+            String date= new SimpleDateFormat("d MMMM yyyy").format(mBirthday.getDate());//Созданный свой стиль отображения даты.
+            mDateTextView.setText(date);
+
             mNotifyImageView.setVisibility(mBirthday.isReceiveNotify() ? View.VISIBLE:View.GONE);
 //            mPersonImageView.setImageBitmap(); Будет использоваться в дальнейшем.
         }
@@ -120,7 +125,6 @@ public class BirthdayListFragment extends Fragment {
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-
 
                     FragmentManager fragmentManager=getFragmentManager();
                     FragmentDeleteUser fragmentDeleteUser=FragmentDeleteUser.newInstance(mBirthday.getId());

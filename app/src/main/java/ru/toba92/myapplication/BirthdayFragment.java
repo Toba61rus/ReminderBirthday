@@ -16,15 +16,20 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
+import java.util.logging.SimpleFormatter;
 
 
 public class BirthdayFragment extends Fragment {
 
-    private Button mRemoveUser;
+//    private ImageButton mDeleteUser;
     private Birthday mBirthday;
     private Button mButtonDate;
     private ImageView mAvatarUser;//Будет использоваться в дальнейшем!
@@ -106,19 +111,28 @@ public class BirthdayFragment extends Fragment {
         mReceiveNotify.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                Будет реализованно позже! Будет включать уведомления о предстоящем дне рождении.
-            mBirthday.setReceiveNotify(isChecked);
+                mBirthday.setReceiveNotify(isChecked);
+//Если чекбокс не нажат,то сервис не будет активирован, в дальнейшем будет использоваться для включения сервиса с помощью широковещательного приёмника.
+                if (isChecked == true) {
+                    boolean shouldStartAlarm = !ReminderService.isServiceAlarmOn(getActivity());
+                    ReminderService.setServiceAlarm(getActivity(), shouldStartAlarm);
+                    Toast.makeText(getActivity(),getString(R.string.notify_on), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getActivity(), getString(R.string.notify_off), Toast.LENGTH_SHORT).show();
+                    ReminderService.setServiceAlarm(getActivity(),false);
+                }
 
             }
         });
-        mRemoveUser=(Button) view.findViewById(R.id.remove_user);
-        mRemoveUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-            }
-        });
+//        mDeleteUser =(ImageButton) view.findViewById(R.id.delete_user_image_button);
+//        mDeleteUser.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                BirthdayLab.get(getActivity()).deleteBirthday(mBirthday);
+//
+//
+//            }
+//        });
 
         return view;
     }
@@ -135,9 +149,8 @@ public class BirthdayFragment extends Fragment {
 
     }
         private void updateDate(){
-        mButtonDate.setText(mBirthday.getDate().toString());
+        String date=new SimpleDateFormat("d MMMM yyyy").format(mBirthday.getDate());//Созданный свой стиль отображения даты.
+        mButtonDate.setText(date);
 
         }
-
-
-}
+    }
