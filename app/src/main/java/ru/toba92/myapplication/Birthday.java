@@ -12,6 +12,23 @@ public class Birthday {
     private boolean mReceiveNotify;
     private String mInformation;
 
+    //Конструкторы
+    public Birthday(){
+        this(UUID.randomUUID());
+    }
+
+    public Birthday(UUID id){
+        mId=id;
+        mDate=new Date();
+    }
+////////////////////////////////////////////////
+
+    public Date getDate() {
+        return mDate;}
+
+    public void setDate(Date date) {
+        mDate = date;
+    }
     public boolean isReceiveNotify() {
         return mReceiveNotify;
     }
@@ -24,12 +41,7 @@ public class Birthday {
     public UUID getId() {
         return mId;
     }
-    public Date getDate() {
-        return mDate;
-    }
-    public void setDate(Date date) {
-        mDate = date;
-    }
+
     public String getInformation() {
         return mInformation;
     }
@@ -38,12 +50,11 @@ public class Birthday {
     }
 
 
-    public Birthday(){
-       this(UUID.randomUUID());
+    public void setId(UUID id) {
+        mId = id;
     }
-    public Birthday(UUID id){
-        mId=id;
-        mDate=new Date();
-    }
+
+
+
 
 }

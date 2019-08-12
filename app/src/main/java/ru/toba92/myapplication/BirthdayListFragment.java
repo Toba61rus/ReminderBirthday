@@ -17,10 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
@@ -131,8 +128,6 @@ public class BirthdayListFragment extends Fragment {
                     fragmentDeleteUser.setTargetFragment(BirthdayListFragment.this,REQUEST_ID_DELETE);
                     fragmentDeleteUser.show(fragmentManager,DIALOG_DELETE_USER);
 
-//                    BirthdayLab.get(getActivity()).deleteBirthday(mBirthday);
-//                    updateUI();
 
                     return true;
                 }
@@ -145,6 +140,7 @@ public class BirthdayListFragment extends Fragment {
 //          Отработка нажатий на элементы списка с последующим переходов детализации данного пользователя списка.
             Intent intent=BirthdayViewPager.newIntent(getActivity(),mBirthday.getId());
             startActivity(intent);
+
 
         }
     }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ReminderBirthday</string>
+
+    <string name="activity_notify">Включить уведомление</string>
+    <string name="date_birthday">Дата рождения</string>
+    <string name="click_for_input_data">Нажмите для ввода данных</string>
+    <string name="date">Дата рождения</string>
+    <string name="fio_user">ФИО пользователя</string>
+    <string name="add">ADD</string>
+    <string name="delete_user">Вы действительно хотите удалить пользователя?</string>
+    <string name="delete">Delete</string>
+    <string name="notify_on">Уведомления включены!</string>
+    <string name="notify_off">Уведомления отключены!</string>
+    <string name="new_event_title">У вас новое напоминание!</string>
+    <string name="content_text_notify">У вашего друга День рождение! Поздравить?</string>
+    <string name="information">Подробная информация</string>
+    <string name="call">Позвонить?</string>
+    <string name="write">Написать?</string>
+    <string name="cancel">Отменить</string>
+</resources>

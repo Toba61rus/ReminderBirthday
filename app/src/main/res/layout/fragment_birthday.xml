@@ -13,7 +13,7 @@
         android:layout_alignStart="@+id/information_congratulated"
         android:layout_marginBottom="-74dp"
         android:padding="8dp"
-        android:text="Подробная информация"
+        android:text="@string/information"
         android:textSize="20dp" />
 
     <Button
