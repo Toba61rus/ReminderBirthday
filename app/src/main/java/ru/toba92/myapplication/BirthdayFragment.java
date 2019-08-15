@@ -52,6 +52,7 @@ public class BirthdayFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedStateInstance){
         super.onCreate(savedStateInstance);
+
         mBirthday=new Birthday();
         UUID birthdayID=(UUID) getArguments().getSerializable(ARG_ID_BIRTHDAY);
         mBirthday=BirthdayLab.get(getActivity()).getBirthday(birthdayID);

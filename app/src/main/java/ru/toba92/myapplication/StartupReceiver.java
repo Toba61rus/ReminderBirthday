@@ -12,5 +12,7 @@ public class StartupReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Log.i(TAG,"Receiver broadcast intent "+ intent.getAction());
 
+        boolean isOn=QueryPreferences.isAlarmOn(context);
+        ReminderService.setServiceAlarm(context,isOn);
     }
 }

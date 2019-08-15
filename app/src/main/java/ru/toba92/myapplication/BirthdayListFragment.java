@@ -2,10 +2,11 @@ package ru.toba92.myapplication;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,39 +19,39 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 
 //Контроллер представления списка пользователей.
-public class BirthdayListFragment extends Fragment {
+public class BirthdayListFragment extends VisibleFragment{
 
     private static final int REQUEST_ID_DELETE =0;
     private RecyclerView mRecyclerViewListBirthday;
     private BirthdayAdapter mBirthdayAdapter;
     private static final String DIALOG_DELETE_USER="DialogDeleteUser";
+    private Birthday mBirthday;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.add_user:
-                Birthday birthday=new Birthday();
-                BirthdayLab.get(getActivity()).addBirthday(birthday);
-                Intent intent=BirthdayViewPager.newIntent(getActivity(),birthday.getId());
-                startActivity(intent);
-                return true;
-                default:
-                    return super.onOptionsItemSelected(item);
+        mBirthday=new Birthday();
+        UUID userId=(UUID) mBirthday.getId();
+
+        Intent serviceIntent=ReminderService.newIntentIDUser(getActivity(),userId);
+////        if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.O){
+//            getActivity().startForegroundService(serviceIntent);}
+//        else {
+            getActivity().startService(serviceIntent);
+        ReminderService.setServiceAlarm(getActivity(),true);
 
         }
-    }
+//    }
 
     @Nullable
     @Override
@@ -74,6 +75,19 @@ public class BirthdayListFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.toolbar_list_birthday,menu);
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.add_user:
+                Birthday birthday = new Birthday();
+                BirthdayLab.get(getActivity()).addBirthday(birthday);
+                Intent intent = BirthdayViewPager.newIntent(getActivity(), birthday.getId());
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+            }
+        }
 //Метод обновления представления на экране вывода списка.
     public  void updateUI() {
         BirthdayLab birthdayLab=BirthdayLab.get(getActivity());

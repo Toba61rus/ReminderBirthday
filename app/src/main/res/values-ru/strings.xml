@@ -15,7 +15,7 @@
     <string name="new_event_title">У вас новое напоминание!</string>
     <string name="content_text_notify">У вашего друга День рождение! Поздравить?</string>
     <string name="information">Подробная информация</string>
-    <string name="call">Позвонить?</string>
-    <string name="write">Написать?</string>
+    <string name="call">Позвонить</string>
+    <string name="write">Написать</string>
     <string name="cancel">Отменить</string>
 </resources>

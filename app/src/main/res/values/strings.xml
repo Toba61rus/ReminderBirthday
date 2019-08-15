@@ -14,7 +14,7 @@
 <string name="new_event_title">You have new event!</string>
 <string name="content_text_notify">Your friend Birthday!</string>.
     <string name="information">Information</string>
-    <string name="call">Call?</string>
-    <string name="write">Write?</string>
+    <string name="call">Call</string>
+    <string name="write">Write</string>
     <string name="cancel">Cancel</string>
 </resources>

@@ -21,6 +21,7 @@ public class Birthday {
         mId=id;
         mDate=new Date();
     }
+
 ////////////////////////////////////////////////
 
     public Date getDate() {

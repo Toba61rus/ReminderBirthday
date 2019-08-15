@@ -14,8 +14,6 @@ public class FragmentDeleteUser extends DialogFragment {
 
     private static final String ARG_ID_USER_DELETE ="idUserDelete";
     public static final String EXTRA_ID_USER_DELETE="ru.toba92.myapplication.id_user_delete";
-    private Birthday mUserDelete;
-    private FragmentDeleteUser mFragmentDeleteUser;
 
 //Мето получения арумента ID данного пользователя,для дальнейшего его удаления.
 
